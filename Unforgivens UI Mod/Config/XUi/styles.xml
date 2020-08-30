@@ -1,0 +1,11 @@
+<UnforgivensA19-UI>
+
+    <!-- Neue Farben -->
+    <append xpath="/styles/global">
+        <style_entry name="ora" value="76,153,0"/>
+        <style_entry name="gelb" value="0,204,204"/>
+		<style_entry name="font_face" value="Bold"/>
+		<style_entry name="font_size" value="32"/>
+    </append>
+
+</UnforgivensA19-UI>
