@@ -1,0 +1,27 @@
+<configs>
+<!-- Party Interface -->
+	<append xpath="/controls">
+		<fpsHUD_party_entry>
+			<rect width="168" height="27" pos="60, 0" controller="PartyEntry" visible="{partyvisible}">
+
+				<sprite depth="2" name="background" color="0,0,0,140" height="22" width="165" type="sliced" />
+
+				<filledsprite depth="3" name="BarHealthModifiedMax" color="110,110,110,128" height="22" width="165" type="filled" fill="{healthmodifiedmax}" />
+				<filledsprite depth="3" name="BarStaminaModifiedMax" color="110,110,110,128" height="22" width="165" type="filled" fill="{staminamodifiedmax}" />
+
+				<filledsprite depth="5"  name="BarHealth" color="255,0,0,128" width="165" height="22" type="filled" fill="{healthfill}" />
+				<filledsprite depth="5"  pos="0, -22" name="BarStamina" color="0,54,255,128" width="165" height="6" type="filled" fill="{staminafill}" />
+
+				<!--					<filledsprite depth="8" name="BarHealthModifiedMax" color="0,0,0,255" width="165" fillcenter="false" type="filled" fill="{healthmodifiedmax}" />-->
+				<!--					<filledsprite depth="3" name="BarHealthModifiedMax" color="0,0,0,255" width="165" fillcenter="false" type="filled" fill="{healthmodifiedmax}" />-->
+
+
+				<label depth="6" name="TextContent" pos="6, 0" font_size="20" color="[white]" justify="left" pivot="topleft" text="{name} {level}" height="30" width="124"/>
+				<label depth="6" name="TextContent" pos="200,0" font_size="20" color="[white]" pivot="topleft" text="{distance}" height="30" effect="outline"/>
+
+				<sprite depth="8" name="leader" width="16" height="16" pos="140,-2" sprite="{icon}" visible="{showicon}" />
+				<sprite depth="8" name="arrowContent" width="16" height="16" pos="184,-10" sprite="ui_game_symbol_map_player_arrow" visible="{showarrow}" pivot="center" color="{arrowcolor}" />
+			</rect>
+		</fpsHUD_party_entry>
+	</append>
+</configs>

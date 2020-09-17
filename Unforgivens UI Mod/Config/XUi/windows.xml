@@ -1,5 +1,66 @@
 <Unforgivens-A19-UI>
 
+<!--  Compass -->
+    <remove xpath="/windows/window[@name='windowCompass']"/>
+
+    <append xpath="/windows">
+        <window name="windowCompass" pos="-190,-35" size="380,43" controller="CompassWindow">
+
+            <!-- Environmental Information -->
+            <sprite pos="65,-50" sprite="" color="255,255,255,255" globalopacitymod="1.8">
+                <label name="fpsHUDday" depth="2" pos="5,0" width="70" height="30"
+                       text="Day  [{daycolor|always}]{day|always}" font_size="20" crispness="Never" effect="outline"
+                       effect_distance="1,1" upper_case="true" pivot="center" justify="center"/>
+                <label name="fpsHUDtime" depth="2" pos="75,0" width="70" height="40" text="{time|always}"
+                       font_size="20" crispness="Never" effect="outline" effect_distance="1,1" upper_case="true"
+                       pivot="center" justify="center"/>
+                <label name="fpsHUDelevationValue" depth="2" pos="130,0" width="70" height="40" text="{mapelevation} M"
+                       font_size="20" crispness="Never" effect="outline" effect_distance="1,1" upper_case="true"
+                       pivot="center" justify="center" controller="MapStats"/>
+                <label name="fpsHUDmapTemperature" depth="2" pos="180 ,0" width="70" height="40" text="{maptemperature}"
+                       font_size="20" crispness="Never" effect="outline" effect_distance="1,1" upper_case="true"
+                       pivot="center" justify="center" controller="MapStats"/>
+                <label name="fpsHUDcoreTemperature" depth="2" pos="240 ,0" width="120" height="40" text=" [ {playercoretemp} ]"
+                       font_size="20" crispness="Never" effect="outline" effect_distance="1,1" upper_case="true"
+                       pivot="center" justify="center" controller="MapStats"/>
+            </sprite>
+            <!--background for custom compass-->
+            <sprite depth="0" name="background" color="0,0,0,180" pos="-37,15" size="455, 50" globalopacitymod="0" type="sliced" />
+            <!--marker for custom compass-->
+            <texture name="fpsHUDcompassMarker" depth="5" pos="170,15" size="42,64"
+                     texture="@https://raw.githubusercontent.com/lloan/7DTD-fpsHUD/master/Textures/ui_hud_compass_marker.png"
+                     color="[darkGrey]"/>
+            <!--custom compass texture-->
+            <texture name="compassTexture" depth="4" pos="0,5" size="380,30" texture="@https://raw.githubusercontent.com/lloan/7DTD-fpsHUD/master/Textures/ui_game_compass.png" tooltip="Navigation" rect_size="0.25,1" rect_offset=".8,0"/>
+
+            <rect name="playerInfo" size="700,100" depth="99" pos="500,0" controller="CharacterFrameWindow">
+                <sprite depth="3" pos="-40,4" height="20" width="150" color="[darkGrey]" foregroundlayer="true" type="sliced"/>
+                <sprite depth="4" pos="-40,4" height="20" width="150" color="{xpcolor}" sprite="menu_empty3px" type="filled" fill="{xp}" globalopacitymod="1.5"
+                        controller="ToolbeltWindow" standard_xp_color="85,125,180,200" updating_xp_color="[green]"
+                        deficit_xp_color="[red]" xp_fill_speed="3.5"/>
+
+                <rect>
+                    <panel name="header" height="15" depth="1" pos="9999,9999" backgroundspritename="ui_game_panel_header">
+                        <label depth="2" name="characterName" pos="42,-6" width="150" height="32" text="" font_size="32"/>
+                        <label depth="2" name="levelNumber" pos="240,-10" width="80" height="28" text="" color="[lightGrey]"/>
+                    </panel>
+
+                    <rect visible="{showcharacter}" pos="9999,9999" >
+                        <panel name="previewFrame" depth="0" pos="0,0" width="10" on_press="true" on_hover="true" disableautobackground="true" snap="false">
+                            <rect>
+                                <texture depth="2" name="playerPreview" material="Materials/Transparent Colored" size="8,8" globalopacity="false"/>
+                            </rect>
+                        </panel>
+                    </rect>
+
+                    <label depth="5" name="TextContent" pos="-35,4" font_size="18" color="[white]" justify="left" pivot="topleft" text="Level: {playerlevel} - {playerxptonextlevel}" controller="PlayerStatsWindow"/>
+                    <label name="playerXP" font_size="18" pos="135,4" controller="PlayerStatsWindow" color="[white]" depth="5" effect="outline" text="KDZ - {playerpvpkills} | {playerdeaths} | {playerzombiekills}" justify="left"/>
+                </rect>
+
+            </rect>
+        </window>
+    </append>
+	
 <!-- Food and drink added -->
 
 	<remove xpath="/windows/window[@name='HUDLeftStatBars']" />
@@ -156,22 +217,7 @@
 		
 	
 	
-<!-- Compass renewed -->
-	
-	<remove xpath="/windows/window[@name='windowCompass']" />
-	<append xpath="/windows">
-		<window name="windowCompass" style="compass.window" controller="CompassWindow">
-			<sprite style="compass.window.background.border"/>
-			<sprite style="compass.window.background"/>
-			<sprite style="compass.window.compass.background">
-			</sprite>
-			<texture style="compass.window.compass.texture" name="compassTexture" rect_size="0.25,1" rect_offset=".8,0" >
-			</texture>
-			<sprite pos="240,-60" sprite="" color="222,255,163,255" globalopacitymod="1.8">
-				<label depth="2" width="300" height="30" text="{daytitle}: [{daycolor|always}]{day|always}[-] --- {timetitle}: {time|always}" font_size="34" pivot="center" effect="outline" upper_case="true" justify="center"/>
-			</sprite>
-		</window>	
-	</append>
+ 
 	
 <!-- Current key highlighted in color when interacting. -->
 	
@@ -182,5 +228,38 @@
 		</window>
 	</append>
 	
+	 <!-- Chat and Output -->
+    <remove xpath="/windows/window[@name='chatoutput']"/>
+
+    <append xpath="/windows">
+
+        <window name="chatoutput" pos="20, -350" depth="100" width="800" height="600" anchor="LeftTop" controller="ChatOutput" fadeout_wait_time="10" fadeout_duration="1">
+            <textlist name="txtOutput" pos="8,-214" width="485" height="170" list_style="chat" pivot="bottomleft" depth="2" font_size="32" crispness="Never" />
+        </window>
+
+    </append>
+
+    <remove xpath="/windows/window[@name='chat']"/>
+
+    <append xpath="/windows">
+        <window name="chat" pos="20, -350" width="500" height="180" anchor="LeftTop" controller="Chat" cursor_area="true">
+            <rect name="input" depth="2" pos="0,-218" height="32">
+                <combobox name="cbxTarget" type="ComboBoxList`1[EChatType]" value_max="party" pos="2, -6" width="100" height="22" font_size="28" localization_prefix="xuiChatTarget" />
+                <textfield name="txtInput" backgroundcolor="[transparent]" depth="2" pos="110,-16" width="386" height="28" pivot="left" justify="left" overflow="ClampContent" max_line_count="1" crispness="Never" />
+            </rect>
+            <sprite color="[black]" pos="0, -50" height="200" type="sliced" globalopacitymod="0.9" />
+        </window>
+    </append>
+
+    <remove xpath="/windows/window[@name='windowGroupBars']"/>
+
+    <append xpath="/windows">
+    <window name="windowGroupBars" controller="PartyWindow" depth="-20">
+        <grid name="hud" pos="20,-25" rows="7" cols="1" width="168" cell_width="168" cell_height="40" side="right" repeat_content="true" controller="PartyEntryList" >
+            <fpsHUD_party_entry />
+        </grid>
+    </window>
+    </append>
+
 
 </Unforgivens-A19-UI>
